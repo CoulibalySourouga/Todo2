@@ -1,0 +1,54 @@
+<div class="container">
+  <form #f="ngForm">
+    <fieldset class="border border-dark-1" id="field1">
+    <div class="leg"> <label class="lab"> Informations générales</label></div>
+    <div class="mb-3">
+      <label for="login" class="form-label">Nom</label>
+      <input type="text" class="" id="nom" name="nom" ngModel [ngModel]="user.nom" required #n="ngModel">
+    </div>
+    <div class="alert alert-danger" *ngIf="n.invalid && n.touched">
+      The Name is a required field
+    </div>
+    <div class="mb-3">
+      <label for="Email" class="form-label">Email</label>
+      <input type="text" class="" id="Email" name="email" aria-describedby="emailHelp" [ngModel]="user.email" required ngModel #e="ngModel"
+        pattern="[a-zA-Z0-9]+.+[a-zA-Z0-9]+@[a-zA-Z0-9]+.+[a-zA-Z0-9]{2,3}">
+      <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+    </div>
+    <div class="alert alert-danger" *ngIf="e.invalid && e.touched">
+      <div *ngIf="e.errors && e.errors['required']"> The Email is a required field</div>
+      <div *ngIf="e.errors && e.errors['pattern']"> The Email doesn't seem right</div>
+    </div>
+    <fieldset class="border border-1" id="field2">
+    <div class="leg"> <label class="lab"> Informations de Payement</label></div>
+    <div class="mb-3">
+      <label for="" class="form-label">Type De Carte</label>
+      <input type="text" class="" id="typeC" name="typeCarte" ngModel [ngModel]="user.typeDeCarte" required #t="ngModel">
+    </div>
+    <div class="alert alert-danger" *ngIf="t.invalid && t.touched">
+      The Carte type is a required field
+    </div>
+    <div class="mb-3">
+      <label for="" class="form-label">Numéro De Carte</label>
+      <input type="number" class="" id="NumC" name="numero" ngModel [ngModel]="user.numeroCarte" required #p="ngModel" pattern="[0-9]{16}">
+    </div>
+    <div class="alert alert-danger" *ngIf="p.invalid && p.touched">
+      <div *ngIf="p.errors && p.errors['required']"> The Num Carte is a required field</div>
+      <div *ngIf="p.errors && p.errors['pattern']"> The Num Carte doesn't seem right</div>
+    </div>
+    <div class="mb-3">
+      <label for="" class="form-label">Date Expiration</label>
+      <input type="text" class="" id="date" name="date" ngModel [ngModel]="user.dateExpiration" required #d="ngModel">
+    </div>
+    <div class="alert alert-danger" *ngIf="d.invalid && d.touched">
+      The Date is a required field
+    </div>
+    <div class="mb-3" [hidden]="d.invalid||p.invalid||t.invalid">
+      <label  class="form-label">Code</label>
+      <input type="number" class="" id="code" name="code" ngModel [ngModel]="user.code" required #p="ngModel">
+    </div>
+  </fieldset>
+    <button class="btn btn-success" id="butt" [disabled]="f.invalid" (click)="save(f.value)">Ajouter</button>
+  </fieldset>
+  </form>
+</div>
